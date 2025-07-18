@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Hero Section (Problem) -->
+    <!-- Hero Section -->
     <section class="hero">
         <nav class="navbar">
             <div class="container">
@@ -23,11 +23,113 @@
                 </div>
             </div>
         </nav>
+        
+        <!-- Animated Background -->
+        <div class="hero-background">
+            <div class="floating-code code-1">&lt;/&gt;</div>
+            <div class="floating-code code-2">{ }</div>
+            <div class="floating-code code-3">( )</div>
+            <div class="floating-code code-4">[ ]</div>
+            <div class="floating-code code-5">#</div>
+            <div class="floating-code code-6">@</div>
+            <canvas id="particle-canvas"></canvas>
+        </div>
+        
         <div class="hero-content">
-            <h1 class="hero-title">
+            <div class="hero-main">
+                <div class="hero-badge">🚀 2024年最新カリキュラム</div>
+                <h1 class="hero-title">
+                    <span class="title-line">
+                        <span class="title-word">コードを</span>
+                        <span class="title-word gradient-text">感じる</span>
+                    </span>
+                    <span class="title-line">
+                        <span class="title-word">新しい</span>
+                        <span class="title-word gradient-text">学習体験</span>
+                    </span>
+                </h1>
+                <p class="hero-subtitle">
+                    Vibe Codingは、仲間と共に成長できる<br>
+                    実践的プログラミング学習コミュニティです
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1,200+</div>
+                        <div class="stat-label">受講生</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">満足度</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3ヶ月</div>
+                        <div class="stat-label">平均習得期間</div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#cta" class="btn-hero-primary">
+                        <span>無料で始める</span>
+                        <svg class="btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#features" class="btn-hero-secondary">
+                        <span>詳しく見る</span>
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <p>大手企業のエンジニアも推薦</p>
+                    <div class="trust-logos">
+                        <div class="trust-logo">Google</div>
+                        <div class="trust-logo">Microsoft</div>
+                        <div class="trust-logo">Amazon</div>
+                        <div class="trust-logo">Meta</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-editor">
+                    <div class="editor-header">
+                        <div class="editor-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="editor-title">vibecoding.js</div>
+                    </div>
+                    <div class="editor-content">
+                        <pre><code><span class="keyword">const</span> <span class="variable">vibeCoding</span> = {
+  <span class="property">mission</span>: <span class="string">"全ての人にコーディングの楽しさを"</span>,
+  <span class="property">features</span>: [
+    <span class="string">"実践的カリキュラム"</span>,
+    <span class="string">"充実したメンターサポート"</span>,
+    <span class="string">"活発なコミュニティ"</span>
+  ],
+  <span class="method">start</span>: () => {
+    <span class="keyword">return</span> <span class="string">"あなたの新しいキャリアが始まる"</span>;
+  }
+};</code></pre>
+                    </div>
+                </div>
+                <div class="hero-glow"></div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <p>スクロールして詳細を見る</p>
+        </div>
+    </section>
+
+    <!-- Problem Section (moved from hero) -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <h2 class="section-title">
                 <span class="gradient-text">プログラミング学習で</span><br>
                 <span class="gradient-text">こんな悩みはありませんか？</span>
-            </h1>
+            </h2>
             <div class="problem-cards">
                 <div class="problem-card">
                     <div class="problem-icon">😰</div>

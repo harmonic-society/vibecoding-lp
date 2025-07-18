@@ -20,14 +20,129 @@ window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
     if (currentScroll > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        navbar.style.background = 'rgba(15, 12, 41, 0.95)';
+        navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.5)';
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)';
+        navbar.style.background = 'rgba(255, 255, 255, 0)';
+        navbar.style.boxShadow = 'none';
+    }
+    
+    // Update navbar text colors based on scroll
+    const navLinks = navbar.querySelectorAll('.nav-menu a:not(.btn-nav)');
+    const navBrand = navbar.querySelector('.nav-brand');
+    
+    if (currentScroll > 100) {
+        navLinks.forEach(link => link.style.color = '#cbd5e1');
+        navBrand.style.filter = 'brightness(1.2)';
+    } else {
+        navLinks.forEach(link => link.style.color = 'white');
+        navBrand.style.filter = 'brightness(1)';
     }
     
     lastScroll = currentScroll;
+});
+
+// Particle animation
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const particleCount = 100;
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+        this.opacity = Math.random() * 0.5 + 0.2;
+    }
+    
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+    }
+    
+    draw() {
+        ctx.fillStyle = `rgba(102, 126, 234, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// Initialize particles
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+// Animation loop
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    
+    // Draw connections
+    particles.forEach((particle, index) => {
+        for (let j = index + 1; j < particles.length; j++) {
+            const dx = particle.x - particles[j].x;
+            const dy = particle.y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 100) {
+                ctx.strokeStyle = `rgba(102, 126, 234, ${0.1 * (1 - distance / 100)})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particle.x, particle.y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+            }
+        }
+    });
+    
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Typing animation for code editor
+const codeLines = [
+    { delay: 0, text: 'const vibeCoding = {' },
+    { delay: 500, text: '  mission: "全ての人にコーディングの楽しさを",' },
+    { delay: 1000, text: '  features: [' },
+    { delay: 1500, text: '    "実践的カリキュラム",' },
+    { delay: 2000, text: '    "充実したメンターサポート",' },
+    { delay: 2500, text: '    "活発なコミュニティ"' },
+    { delay: 3000, text: '  ],' },
+    { delay: 3500, text: '  start: () => {' },
+    { delay: 4000, text: '    return "あなたの新しいキャリアが始まる";' },
+    { delay: 4500, text: '  }' },
+    { delay: 5000, text: '};' }
+];
+
+// Initial navbar style
+navbar.style.background = 'rgba(255, 255, 255, 0)';
+navbar.style.boxShadow = 'none';
+navbar.querySelectorAll('.nav-menu a:not(.btn-nav)').forEach(link => {
+    link.style.color = 'white';
 });
 
 // Countdown timer
@@ -166,11 +281,20 @@ document.querySelectorAll('.problem-card, .solution-card, .testimonial-card, .co
     });
 });
 
-// Parallax effect for hero section
+// Parallax effect for hero section and floating codes
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    const heroBackground = document.querySelector('.hero-background');
+    const floatingCodes = document.querySelectorAll('.floating-code');
+    
+    if (heroBackground) {
+        heroBackground.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+    
+    floatingCodes.forEach((code, index) => {
+        const speed = 0.5 + (index * 0.1);
+        code.style.transform = `translateY(${scrolled * speed}px)`;
+    });
 });
 
 // Number counting animation for stats
